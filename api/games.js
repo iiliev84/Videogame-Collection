@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
 export default router;
-import { getExercisesIncludingWorkout } from "#db/queries/exercises"
+import { createGame, getGames, getGame, deleteGame, updateGame } from "#db/queries/games"
 
 router.route("/").get(async (req, res) => {
-  const exercises = await getExercisesIncludingWorkout();
-  res.send(exercises);
+  const games = await getGames();
+  res.send(games);
 });
 
