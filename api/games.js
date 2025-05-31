@@ -52,7 +52,7 @@ router.route("/:id").delete(async (req, res) => {
 router.route("/:id").put(async (req, res) => {
     const id = Number(req.params.id)
     if(!req.body){
-        return res.status(400).send({error: "Please send details"})
+        return res.status(400).send({error: "Missing body"})
     }
     const {title, genre, release_year} = req.body
 
