@@ -64,7 +64,7 @@ router.route("/:id").put(async (req, res) => {
   }
     const game = await getGame(id)
     if(!game){
-        return res.status(404).send({error: "Platform not found"})
+        return res.status(404).send({error: "Game not found"})
     }
     const games = await updateGame({id, title, genre, release_year})
     res.send(games)

@@ -43,6 +43,5 @@ export async function createGame({title, genre, release_year, platform_id}) {
     WHERE id = $4
     RETURNING *;`
     const {rows: game} = await db.query(sql, [title, genre, release_year, id]);
-    console.log(game);
     return game[0];
   }

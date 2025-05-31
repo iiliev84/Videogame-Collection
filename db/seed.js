@@ -5,7 +5,7 @@ import { createPlatform } from "#db/queries/platforms";
 await db.connect();
 await seed();
 await db.end();
-console.log("🌱 Database seeded.");
+console.log("🌱 Database seeded. 🌱");
 
 async function seed() {
 

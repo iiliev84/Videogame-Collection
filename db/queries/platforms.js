@@ -40,6 +40,5 @@ export async function deletePlatform(id){
     WHERE id = $3
     RETURNING *;`
     const {rows: platform} = await db.query(sql, [name, manufacturer, id]);
-    console.log(platform);
     return platform[0];
   }
