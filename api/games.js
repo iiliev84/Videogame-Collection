@@ -4,13 +4,13 @@ export default router;
 import { createGame, getGames, getGame, deleteGame, updateGame } from "#db/queries/games"
 
 function isValidId(id) {
-  const num = Number(id);
-  return Number.isInteger(num) && num > 0;
+    const num = Number(id);
+    return Number.isInteger(num) && num > 0;
 }
 
 router.route("/").get(async (req, res) => {
-  const games = await getGames();
-  res.send(games);
+    const games = await getGames();
+    res.send(games);
 });
 
 router.route("/").post(async (req, res) => {
@@ -68,5 +68,4 @@ router.route("/:id").put(async (req, res) => {
     }
     const games = await updateGame({id, title, genre, release_year})
     res.send(games)
-
 })

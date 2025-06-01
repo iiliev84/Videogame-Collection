@@ -6,6 +6,10 @@ import platformsRouter from "#api/platforms";
 
 app.use(express.json())
 
+app.route('/').get((req,res)=>{
+    res.send("Welcome to the Videogame Collection API.")
+})
+
 app.use("/games", gamesRouter);
 app.use("/platforms", platformsRouter);
 
