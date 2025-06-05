@@ -57,7 +57,7 @@ app.post('/login', async(req,res,next) => {
 app.get('/favorite', verifyToken, async(req,res,next) => {
   try {
     const favGames = await db.query(`SELECT * FROM users WHERE favorite = true`);
-    if(!favGames) return res.status(404).send('Couldnt find favorite movies');
+    if(!favGames) return res.status(404).send('Couldnt find favorite game');
     res.status(201).json(favGames);
   }catch(error){
     console.log(error);
