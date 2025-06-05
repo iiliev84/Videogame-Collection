@@ -4,7 +4,6 @@ export default app;
 import gamesRouter from "#api/games";
 import platformsRouter from "#api/platforms";
 import usersRouter from "#api/users";
-import { verifyToken } from "#api/users";
 
 app.use(express.json())
 
