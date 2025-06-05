@@ -4,7 +4,6 @@ const router = express.Router();
 export default router;
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-const app = express();
 
 export function verifyToken(req, res, next){
   const authHeader = req.headers['Authorization'];
@@ -15,7 +14,7 @@ export function verifyToken(req, res, next){
   next();
 }
 
-app.get('/', async(req, res, next) => {
+router.get('/', async(req, res, next) => {
   try{
     const allUsers = await db.query(`SELECT * FROM users`);
     if(!allUsers) return res.status(404).send('Cant find users');
@@ -25,7 +24,7 @@ app.get('/', async(req, res, next) => {
   }
 })
 
-app.post('/register', async (req, res, next) => {
+router.post('/register', async (req, res, next) => {
   const {email, password, first_name, last_name} = req.body;
   try{
     const hashedPassword = await bcrypt.hash(password, 5)
@@ -41,7 +40,7 @@ app.post('/register', async (req, res, next) => {
   }
 })
 
-app.post('/login', async(req,res,next) => {
+router.post('/login', async(req,res,next) => {
   const {email, password} = req.body;
   try {
     const realUserInfo = await client.query(`SELECT * FROM users WHERE email = $1;`, [email]);
@@ -54,7 +53,7 @@ app.post('/login', async(req,res,next) => {
   }
 })
 
-app.get('/favorite', verifyToken, async(req,res,next) => {
+router.get('/favorite', verifyToken, async(req,res,next) => {
   try {
     const favGames = await db.query(`SELECT * FROM users WHERE favorite = true`);
     if(!favGames) return res.status(404).send('Couldnt find favorite game');

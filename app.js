@@ -16,10 +16,6 @@ app.use("/games", gamesRouter);
 app.use("/platforms", platformsRouter);
 app.use("/users", usersRouter);
 
-app.get('/fav', verifyToken, (req,res) => {
-  res.json({message: `Hello user ${req.user.userId}`})
-})
-
 app.use((err,req,res,next)=>{
     console.log(err)
     res.status(500).send("An error occured " + err)
