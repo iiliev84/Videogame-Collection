@@ -34,7 +34,7 @@ router.post('/register', async (req, res, next) => {
       VALUES ($1, $2, $3, $4)
       RETURNING *;`, [first_name, last_name, email, hashedPassword]);
       if(!newUser) return res.status(401).send(`Couldnt create new user`);
-      const tooken = jwt.sign({id: newUser.id, email: newUser.email}, process.env.JWT_SECRET);
+      const token = jwt.sign({id: newUser.id, email: newUser.email}, process.env.JWT_SECRET);
       res.status(201).json(token)
   }catch(error){
     console.log(error)
