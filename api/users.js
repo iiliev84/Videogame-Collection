@@ -14,13 +14,15 @@ export function verifyToken(req, res, next){
   next();
 }
 
-router.get('/', async(req, res, next) => {
-  try{
+router.get('/', async(req,res,next) => {
+  try {
     const allUsers = await db.query(`SELECT * FROM users`);
     if(!allUsers) return res.status(404).send('Cant find users');
+
+    res.status(200).json(allUsers);
   }catch(err){
     console.log(err)
-    res.status(400).send('Cant find the info')
+    res.status(400).send('Cant find the info');
   }
 })
 
