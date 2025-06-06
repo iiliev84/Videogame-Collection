@@ -1,6 +1,7 @@
 
 DROP TABLE IF EXISTS platforms CASCADE;
 DROP TABLE IF EXISTS games;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE platforms (
   id SERIAL PRIMARY KEY,
@@ -22,6 +23,6 @@ CREATE TABLE users(
     id SERIAL PRIMARY KEY, 
     first_name TEXT, 
     last_name TEXT, 
-    email TEXT NOT NULL, 
+    email TEXT UNIQUE NOT NULL, 
     password TEXT NOT NULL
 );

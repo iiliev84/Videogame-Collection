@@ -4,6 +4,7 @@ const router = express.Router();
 export default router;
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+router.use(express.json())
 
 export function verifyToken(req, res, next){
   const authHeader = req.headers['Authorization'];
@@ -45,13 +46,13 @@ router.post('/register', async (req, res, next) => {
 router.post('/login', async(req,res,next) => {
   const {email, password} = req.body;
   try {
-    const realUserInfo = await client.query(`SELECT * FROM users WHERE email = $1;`, [email]);
-    const isPWMatch = await bcrypt.compare(password, realUserInfo.password);
+    const realUserInfo = await db.query(`SELECT * FROM users WHERE email = $1;`, [email]); 
+    const isPWMatch = await bcrypt.compare(password, realUserInfo.rows[0].password);
     if(!isPWMatch) return res.status(401).send('Not authorized');
-    const token = jwt.sign({id: realUserInfo.id, email: realUserInfo.email});
+    const token = jwt.sign({id: realUserInfo.id, email: realUserInfo.email},process.env.JWT_SECRET);
     res.status(201).json(token);
   }catch(error){
-    console.log('Could not log in')
+    console.log('Could not log in',error)
   }
 })
 
